@@ -48,7 +48,7 @@ specify the location of the config file we just created
 to
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
-apt install aircrack-ng p7zip git
+apt install aircrack-ng p7zip git ocl-icd-libopencl1
 git clone https://github.com/hashcat/hashcat.git
 cd hashcat
 make
